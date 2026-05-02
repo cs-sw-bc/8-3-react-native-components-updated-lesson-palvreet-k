@@ -3,13 +3,14 @@
 // TextInput is controlled by state — same pattern as React on the web.
 
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 // TODO 1: Import TextInput from 'react-native'
 
 export default function TextInputBasic() {
 
   // TODO 2: Create a state variable called 'name', initial value ''
+  const [name, setName] = useState('');
 
   return (
     <View style={styles.container}>
@@ -21,10 +22,17 @@ export default function TextInputBasic() {
           - add a placeholder
           - add autoCapitalize="words"
       */}
+      <TextInput 
+      value={name} 
+      onChangeText={(val)=>setName(val)} 
+      placeholder='Enter name'
+      style= {styles.input}>
+      </TextInput>
 
       {/* TODO 4: Display "Hello, {name}!" below the input
           Show "Hello, stranger!" if name is empty
       */}
+      <Text>Hello {name=='' ? 'Stranger': name}!</Text>
     </View>
   );
 }

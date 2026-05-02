@@ -4,7 +4,7 @@
 // Also exposes onPressIn and onPressOut for fine-grained control.
 
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 // TODO 1: Import Pressable from 'react-native'
 
@@ -23,7 +23,14 @@ export default function PressableDemo() {
           - children as a function: ({ pressed }) => <Text>...</Text>
             Show different label text depending on pressed state
       */}
-
+      <Pressable
+        style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+        onPress={()=>setMessage('User Tapped')}
+        onPressIn={()=>setMessage('User is holding down the button')}
+        onPressOut={()=>setMessage('Released, user cancelled the operation')}
+      >
+        <Text style={styles.buttonText}>A Pressable Button</Text>
+      </Pressable>
       <Text style={styles.feedback}>{message}</Text>
     </View>
   );

@@ -4,7 +4,7 @@
 // Fix: wrap the screen in TouchableWithoutFeedback and call Keyboard.dismiss().
 
 import { useState } from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 
 // TODO 1: Import TouchableWithoutFeedback and Keyboard from 'react-native'
 
@@ -15,6 +15,7 @@ export default function KeyboardDismiss() {
   //         Set onPress={Keyboard.dismiss} so tapping outside dismisses the keyboard
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Text style={styles.heading}>Keyboard Dismiss</Text>
       <Text style={styles.body}>
@@ -29,6 +30,7 @@ export default function KeyboardDismiss() {
       />
       <Text style={styles.hint}>👆 Tap anywhere outside the input</Text>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
