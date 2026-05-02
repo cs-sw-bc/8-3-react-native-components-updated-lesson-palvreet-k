@@ -3,7 +3,7 @@
 // TextInput + Button + Alert validation + keyboard dismiss + conditional rendering
 
 import { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 
 // TODO 1: Import Alert, TouchableWithoutFeedback, and Keyboard from 'react-native'
 
@@ -15,26 +15,22 @@ export default function CombinedExample() {
     setForm({ ...form, [field]: value });
   };
 
-  const handleSubmit = (name, email) => {
+  const handleSubmit = () => {
     // TODO 2: Validate that name is not empty — show an Alert if it is
     // TODO 3: Validate that email is not empty — show an Alert if it is
     // TODO 4: If both are filled, dismiss the keyboard and set submitted to true
-    if(name===''){
-      Alert.alert(
-        'Name Error',
-        'Name cannot be empty!',
-        {text:'OK'}
-      )
-      if(email===''){
-        Alert.alert(
-        'Email Error',
-        'Email cannot be empty!',
-        {text:'OK'}
-      )
-      }
-      Keyboard.dismiss
-      setSubmitted(true);
+    if (!form.name.trim()) {
+      Alert.alert('Name Error', 'Name cannot be empty!');
+      return;
     }
+
+    if (!form.email.trim()) {
+      Alert.alert('Email Error', 'Email cannot be empty!');
+      return;
+    }
+
+    Keyboard.dismiss();
+    setSubmitted(true);
   };
 
   const handleReset = () => {
@@ -54,6 +50,10 @@ export default function CombinedExample() {
         //         Add a "Start Over" Button that calls handleReset
         <View style={styles.success}>
           <Text style={styles.successText}>✅ Submitted!</Text>
+          <Text style={styles.successSub}>
+            Thanks, {form.name}! We will contact you at {form.email}.
+          </Text>
+          <Button title="Start Over" onPress={handleReset} color="#4a90d9" />
         </View>
       ) : (
         <>
